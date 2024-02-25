@@ -9,6 +9,9 @@ app.use(helmet.hidePoweredBy());
 const hidePoweredBy = require("hide-powered-by");
 app.use(hidePoweredBy());
 
+// use framegard. Default: SAMEORIGIN.
+const frameguard = require("frameguard");
+app.use(frameguard({ action: 'deny' }));
 
 
 
