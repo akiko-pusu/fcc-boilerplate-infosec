@@ -11,7 +11,7 @@ var path = require("path");
 
 app.use(function (req, res, next) {
   res.set({
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://www.freecodecamp.org",
     "Access-Control-Allow-Headers":
       "Origin, X-Requested-With, content-type, Accept",
   });
