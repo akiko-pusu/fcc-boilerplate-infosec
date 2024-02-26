@@ -48,6 +48,15 @@ const nocache = require("nocache");
 app.use(nocache());
 
 
+// use 'helmet-csp' instead of helmet.contentSecurityPolicy().
+const contentSecurityPolicy = require("helmet-csp");
+app.use(contentSecurityPolicy({
+  useDefaults: true,
+  directives: {
+    defaultSrc: ["'self'"],
+    scriptSrc: ["'self'", 'trusted-cdn.com']
+  }
+}));
 
 
 
