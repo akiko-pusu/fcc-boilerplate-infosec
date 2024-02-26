@@ -11,7 +11,7 @@ var path = require("path");
 
 app.use(function (req, res, next) {
   res.set({
-    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Origin": "https://www.freecodecamp.org",
     "Access-Control-Allow-Headers":
       "Origin, X-Requested-With, content-type, Accept",
   });
@@ -56,6 +56,35 @@ app.get("/app-info", function (req, res) {
 
 app.get("/package.json", function (req, res, next) {
   fs.readFile(__dirname + "/package.json", function (err, data) {
+    if (err) return next(err);
+    res.type("txt").send(data.toString());
+  });
+});
+
+const bcrypt = require('bcrypt');
+
+// change to async function
+app.get("/server.js", async function (req, res, next) {
+
+  const myPlaintextPassword = 'passw0rd!';
+  const saltRounds = 13;
+  /*
+  // START_SYNC
+  const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+  console.log(hash);
+  const result = bcrypt.compareSync(myPlaintextPassword, hash);
+  console.log(result); //true
+  // END_SYNC
+  */
+
+  // Such an implementation would have the same behavior.
+  const hash = await bcrypt.hash(myPlaintextPassword, saltRounds);
+  console.log(hash);
+
+  const result = await bcrypt.compare(myPlaintextPassword, hash);
+  console.log(result);
+
+  fs.readFile(__dirname + "/server.js", function (err, data) {
     if (err) return next(err);
     res.type("txt").send(data.toString());
   });
