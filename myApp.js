@@ -13,6 +13,9 @@ app.use(hidePoweredBy());
 const frameguard = require("frameguard");
 app.use(frameguard({ action: 'deny' }));
 
+// use xssFilter. But this is deprecated. Instead of this, use xXssProtection().
+const xXssProtection = require("x-xss-protection");
+app.use(xXssProtection());
 
 
 
