@@ -17,6 +17,9 @@ app.use(frameguard({ action: 'deny' }));
 const xXssProtection = require("x-xss-protection");
 app.use(xXssProtection());
 
+// use "dont-sniff-mimetype" instead of helmet.noSniff().
+const dontSniffMimetype = require("dont-sniff-mimetype");
+app.use(dontSniffMimetype());
 
 
 
