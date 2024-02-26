@@ -63,18 +63,26 @@ app.get("/package.json", function (req, res, next) {
 
 const bcrypt = require('bcrypt');
 
-app.get("/server.js", function (req, res, next) {
+// change to async function
+app.get("/server.js", async function (req, res, next) {
 
   const myPlaintextPassword = 'passw0rd!';
   const saltRounds = 13;
-  //START_ASYNC
-  bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
-    console.log(hash);
-    bcrypt.compare(myPlaintextPassword, hash, (err, result) => {
-      console.log(result); //true
-    });
-  });
-  // END_ASYNC
+  /*
+  // START_SYNC
+  const hash = bcrypt.hashSync(myPlaintextPassword, saltRounds);
+  console.log(hash);
+  const result = bcrypt.compareSync(myPlaintextPassword, hash);
+  console.log(result); //true
+  // END_SYNC
+  */
+
+  // Such an implementation would have the same behavior.
+  const hash = await bcrypt.hash(myPlaintextPassword, saltRounds);
+  console.log(hash);
+
+  const result = await bcrypt.compare(myPlaintextPassword, hash);
+  console.log(result);
 
   fs.readFile(__dirname + "/server.js", function (err, data) {
     if (err) return next(err);
