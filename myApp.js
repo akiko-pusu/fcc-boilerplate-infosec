@@ -25,6 +25,16 @@ app.use(dontSniffMimetype());
 const ienoopen = require("ienoopen");
 app.use(ienoopen());
 
+// use hsts to force https protocol.
+const strictTransportSecurity = require("hsts");
+
+// Sets "Strict-Transport-Security: max-age=7776000; includeSubDomains"
+app.use(
+  strictTransportSecurity({
+    maxAge: 7776000, // 90 days in second.
+  }),
+);
+
 
 
 
