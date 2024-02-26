@@ -21,6 +21,10 @@ app.use(xXssProtection());
 const dontSniffMimetype = require("dont-sniff-mimetype");
 app.use(dontSniffMimetype());
 
+// use 'ienoopen' instead of helmet.ieNoOpen().
+const ienoopen = require("ienoopen");
+app.use(ienoopen());
+
 
 
 
