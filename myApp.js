@@ -35,6 +35,12 @@ app.use(
   }),
 );
 
+// use 'dns-prefetch-control' instead of helmet.dnsPrefetchControl().
+const dnsPrefetchControl = require("dns-prefetch-control");
+
+// Set X-DNS-Prefetch-Control: off
+app.use(dnsPrefetchControl());
+
 
 
 
