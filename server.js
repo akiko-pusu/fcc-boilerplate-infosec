@@ -64,14 +64,22 @@ app.get("/package.json", function (req, res, next) {
 const bcrypt = require('bcrypt');
 
 app.get("/server.js", function (req, res, next) {
-  /*
+
+  const myPlaintextPassword = 'passw0rd!';
+  const saltRounds = 13;
+  //START_ASYNC
+  bcrypt.hash(myPlaintextPassword, saltRounds, (err, hash) => {
+    console.log(hash);
+    bcrypt.compare(myPlaintextPassword, hash, (err, result) => {
+      console.log(result); //true
+    });
+  });
+  // END_ASYNC
+
   fs.readFile(__dirname + "/server.js", function (err, data) {
     if (err) return next(err);
     res.type("txt").send(data.toString());
   });
-  */
-  // Minimal implementation to meet testing requirements.
-  res.type("txt").send("const bcrypt = require('bcrypt');");
 });
 
 app.use(function (req, res, next) {
