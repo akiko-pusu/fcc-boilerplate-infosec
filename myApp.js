@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const helmet = require('helmet');
+
 /* Use Helmet
 const helmet = require('helmet');
 app.use(helmet.hidePoweredBy());
@@ -40,6 +42,10 @@ const dnsPrefetchControl = require("dns-prefetch-control");
 
 // Set X-DNS-Prefetch-Control: off
 app.use(dnsPrefetchControl());
+
+// use 'nocache' instead of helmet.noCache().
+const nocache = require("nocache");
+app.use(nocache());
 
 
 
