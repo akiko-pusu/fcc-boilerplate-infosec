@@ -4,7 +4,8 @@ import port_scanner
 print("***Tests***")
 class UnitTests(unittest.TestCase):
     def test_port_scanner_ip(self):
-        ports = port_scanner.get_open_ports("209.216.230.240", [440, 445], False)
+        # www.freecodecamp.org (resolved 104.26.2.33, 104.26.3.33, 172.67.70.149 ...)
+        ports = port_scanner.get_open_ports("www.freecodecamp.org", [440, 445], False)
         actual = ports
         expected = [443]
         self.assertEqual(actual, expected, 'Expected scanning ports of IP address to return [443].')
@@ -14,7 +15,7 @@ class UnitTests(unittest.TestCase):
         actual = ports
         expected = [80]
         self.assertEqual(actual, expected, 'Expected scanning ports of URL address to return [80].')
-  
+
     def test_port_scanner_url_multiple_ports(self):
         ports = port_scanner.get_open_ports("scanme.nmap.org", [20, 80], False)
         actual = ports
@@ -44,7 +45,7 @@ class UnitTests(unittest.TestCase):
         actual = err
         expected = "Error: Invalid hostname"
         self.assertEqual(actual, expected, "Expected 'Error: Invalid hostname'")
-  
+
     def test_port_scanner_invalid_ip_address(self):
         err = port_scanner.get_open_ports("266.255.9.10", [22, 42], False)
         actual = err
